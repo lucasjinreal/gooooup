@@ -22,8 +22,21 @@ type ResultJson struct {
 func main() {
 	fmt.Print(cg.BoldStart)
 	cg.Foreground(cg.Blue, true)
-	fmt.Println("gooooup - upload images to cloud for bedding.")
+	fmt.Println("gooooup - upload images(files) to cloud for bedding.")
 	fmt.Print(cg.BoldEnd)
+
+	fmt.Println(`
+
+  ____  ___   ___   ___   ___  _   _ ____
+ / _  |/ _ \ / _ \ / _ \ / _ \| | | |  _ \
+( (_| | |_| | |_| | |_| | |_| | |_| | |_| |
+ \___ |\___/ \___/ \___/ \___/|____/|  __/
+(_____|                             |_|    `)
+	fmt.Print(cg.BoldStart)
+	cg.Foreground(cg.Red, true)
+	fmt.Println("Author JinTian. @wechat: jintianiloveu")
+	fmt.Print(cg.BoldEnd)
+
 
 
 	cg.PrintlnYellow("gooooup will upload image to sms: " + cg.BoldStart + "https://sm.ms" + cg.BoldEnd)
@@ -79,9 +92,10 @@ func main() {
 				} else {
 					// write url directly to pasteboard
 					clipboard.WriteAll(url)
+					fmt.Print("url: ")
+
 					fmt.Print(cg.BoldStart)
 					cg.Foreground(cg.Yellow, true)
-					fmt.Print("url: ")
 					cg.Foreground(cg.Green, true)
 					fmt.Println(url)
 					fmt.Print(cg.BoldEnd)
