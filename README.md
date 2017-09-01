@@ -2,6 +2,11 @@
 
 > a simple tool upload your image to image bed and generate permanent url.
 
+## Synopsis
+**gooooup** is a very convenient tool which is like [gofind](https://github.com/jinfagang/gofind.git). gofind is a search tool, find anythings under specific path, even can search the content file!!
+
+**gooooup** and **gofind** are all implement by golang.
+
 ## Install
 
 to install **gooooup**, just run `install_gooooup.sh` in cloned directory:
