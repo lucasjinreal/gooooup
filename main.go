@@ -22,11 +22,10 @@ type ResultJson struct {
 func main() {
 	fmt.Print(cg.BoldStart)
 	cg.Foreground(cg.Blue, true)
-	fmt.Println("gooooup - upload images(files) to cloud for bedding.")
+	fmt.Println("gooooup - upload images to cloud for bedding.")
 	fmt.Print(cg.BoldEnd)
 
 	fmt.Println(`
-
   ____  ___   ___   ___   ___  _   _ ____
  / _  |/ _ \ / _ \ / _ \ / _ \| | | |  _ \
 ( (_| | |_| | |_| | |_| | |_| | |_| | |_| |
@@ -39,19 +38,29 @@ func main() {
 
 
 
-	cg.PrintlnYellow("gooooup will upload image to sms: " + cg.BoldStart + "https://sm.ms" + cg.BoldEnd)
+	//cg.PrintlnYellow("gooooup will upload image to sms: " + cg.BoldStart + "https://sm.ms" + cg.BoldEnd)
 
 	var uploadUrl = "https://sm.ms/api/upload"
 
 	var markdown bool
+	var showHistory bool
 
 
 	flag.BoolVarP(&markdown, "markdown", "m",false, "result in markdown format.")
+	flag.BoolVarP(&showHistory, "history", "h", false, "show upload history.")
 	flag.Parse()
+
 
 	posArgs := flag.Args()
 	if len(posArgs) == 0 {
-		cg.PrintlnRed("please provide a file path.")
+
+		// if not pos args, indicates user have no arg or using flag
+		if showHistory {
+			// show upload history
+			ShowHistory()
+		} else {
+			cg.PrintlnRed("please provide a file path.")
+		}
 	} else {
 		filePath := posArgs[0]
 		if Exists(filePath) {
@@ -77,6 +86,10 @@ func main() {
 
 				var url string
 				url = dataMap["url"].(string)
+
+				// save this url to history
+				newRecord := Record{FilePath:filePath, Url:url}
+				SaveToHistory(newRecord)
 
 				if markdown {
 					// write markdown url to pasteboard
